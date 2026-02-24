@@ -48,12 +48,26 @@ Edge threshold: Polly bets when |my_p - market_p| >= 0.08 AND my_confidence >= 0
 pip install -r requirements.txt
 ```
 
+## Wallet Architecture
+
+Two-wallet setup on Polygon:
+
+| Wallet | Address | Purpose |
+|--------|---------|---------|
+| **Holding wallet** | `0x81b5155...` | Cold storage, most funds held here |
+| **Polymarket proxy** | `0x9F488Be0...` | Linked to Polymarket account, USDC must be here to trade |
+
+To trade, USDC.e must be deposited to the Polymarket proxy wallet on Polygon.
+The holding wallet private key signs CLOB API authentication.
+
+## Setup
+
 Set environment variables (see `.env.example`):
-- `POLYMARKET_API_KEY`
+- `POLYMARKET_API_KEY` — derived from holding wallet private key
 - `POLYMARKET_API_SECRET`
 - `POLYMARKET_API_PASSPHRASE`
-- `EVM_PRIVATE_KEY`
-- `EVM_WALLET_ADDRESS`
+- `HOLDING_WALLET_PUBLIC` / `HOLDING_WALLET_PRIVATE`
+- `POLYMARKET_WALLET_ADDRESS` — where USDC must be deposited
 
 ## Running
 
